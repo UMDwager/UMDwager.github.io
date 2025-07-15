@@ -1263,6 +1263,12 @@ function PolicyPage({ showNotification }) {
     Should you have any questions about our privacy practices or this Privacy Policy, or if
      you would like to exercise any of the rights available to you, please call or email us at
      cbee69a@gmail.com
+    Shipping Policy:
+
+     All products will get delivered within 3 to 5 working days from the date of ordered.
+     Refund Policy:
+
+     No replacement and No exchange will be provided at any cost, No return and No refund and No cancellation will be provided once item   is ordered.
   `;
 
   // Function to format the policy text for display
