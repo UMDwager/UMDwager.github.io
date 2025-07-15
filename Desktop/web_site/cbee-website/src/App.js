@@ -124,16 +124,32 @@ function HomePage({ setCurrentPage, showNotification }) {
     setShowContent(true);
   }, []);
 
-  const posts = [
-    { id: 1, petName: 'Luna', type: 'Cat', breed: 'Maine Coon', owner: 'Aisha Khan', image: 'https://images.unsplash.com/photo-1574144611937-0130592f69e6?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'Luna loves chasing laser pointers and cuddling.' },
-    { id: 2, petName: 'Max', type: 'Dog', breed: 'Beagle', owner: 'Rajesh Singh', image: 'https://images.unsplash.com/photo-1543466835-09a76895ed13?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'Max is a playful pup who enjoys long walks in the park.' },
-    { id: 3, petName: 'Sparky', type: 'Bird', breed: 'Cockatiel', owner: 'Priya Sharma', image: 'https://images.unsplash.com/photo-1518791841-f7ce3d721e88?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'Sparky loves to whistle tunes and mimic sounds.' },
-    { id: 4, petName: 'Coco', type: 'Rabbit', breed: 'Holland Lop', owner: 'Amit Patel', image: 'https://images.unsplash.com/photo-1559132177-3e5f2e8f1d1f?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'Coco is a shy but sweet rabbit who enjoys fresh greens.' },
-    { id: 5, petName: 'Goldie', type: 'Fish', breed: 'Goldfish', owner: 'Sara Devi', image: 'https://images.unsplash.com/photo-1522069169903-f54817551571?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'Goldie gracefully swims around, bringing peace to the room.' },
-    { id: 6, petName: 'Rocky', type: 'Hamster', breed: 'Syrian', owner: 'Kabir Sharma', image: 'https://images.unsplash.com/photo-1579169008272-3f2d2f3b3b3b?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'Rocky loves running on his wheel and collecting treats.' },
-    { id: 7, petName: 'Whiskers Jr.', type: 'Cat', breed: 'Domestic Shorthair', owner: 'Fatima Ali', image: 'https://images.unsplash.com/photo-1514888717190-c637492c57a2?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'A curious and playful kitten always ready for adventure.' },
-    { id: 8, petName: 'Bruno', type: 'Dog', breed: 'Labrador', owner: 'Deepak Kumar', image: 'https://images.unsplash.com/photo-1561037406-6133f443729e?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'Bruno is a loyal and friendly companion, great with kids.' },
-    { id: 9, petName: 'Sunny', type: 'Bird', breed: 'Canary', owner: 'Meena Reddy', image: 'https://images.unsplash.com/photo-1588523023023-3b2d1d0f8c8b?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', details: 'Sunny\'s cheerful singing brightens every morning.' },
+  // Updated Home Page Content
+  const homeContent = [
+    {
+      id: 1,
+      image: 'https://images.unsplash.com/photo-1583511655099-e616f2c3b2b2?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      title: 'Expert Vet Care',
+      description: 'Find trusted veterinarians near you for all your pet\'s health needs. Book appointments easily and get quick advice.',
+      linkText: 'Find a Vet',
+      linkPage: 'vet-services'
+    },
+    {
+      id: 2,
+      image: 'https://images.unsplash.com/photo-1548199973-03cce0fd87b0?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      title: 'Shop Premium Pet Products',
+      description: 'Explore a wide range of high-quality food, toys, and accessories for your beloved companions.',
+      linkText: 'Visit Pet Shop',
+      linkPage: 'pet-products'
+    },
+    {
+      id: 3,
+      image: 'https://images.unsplash.com/photo-1596492784531-eeaa87491744?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      title: 'Connect with Pet Lovers',
+      description: 'Join our vibrant community to share stories, tips, and connect with fellow pet enthusiasts.',
+      linkText: 'Join Community',
+      linkPage: 'home' // Stays on home, but could link to a future community page
+    }
   ];
 
   return (
@@ -141,40 +157,39 @@ function HomePage({ setCurrentPage, showNotification }) {
       {/* Hero Section */}
       <div className={`text-center max-w-5xl bg-white p-8 rounded-3xl shadow-2xl transition-all duration-1000 transform ${showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} mb-12 mt-8 hover:scale-102`}>
         <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6 leading-tight">
-          Welcome to <span className="text-pink-600">Cbee</span>! {/* Changed to pink-600 */}
+          Welcome to <span className="text-pink-600">Cbee</span>!
         </h1>
         <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto">
           Your adorable hub for all things pets. Discover, connect, and share the love!
         </p>
       </div>
 
-      {/* Dynamic Scroll Section - Featured Pets */}
+      {/* Dynamic Scroll Section - Featured Content */}
       <div className={`container mx-auto mt-12 transition-all duration-1000 delay-300 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-10">
-          Meet Our <span className="text-pink-600">Featured Pets</span>
+          Discover <span className="text-pink-600">Our Services & Products</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((pet, index) => (
+          {homeContent.map((item, index) => (
             <div
-              key={pet.id}
+              key={item.id}
               className={`bg-white rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 delay-${index * 100} hover:scale-105`}
               style={{ opacity: showContent ? 1 : 0, transform: showContent ? 'translateY(0)' : 'translateY(20px)' }}
             >
               <img
-                src={pet.image}
-                alt={pet.petName}
+                src={item.image}
+                alt={item.title}
                 className="w-full h-64 object-cover rounded-t-3xl"
-                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x300/F0F4F8/333?text=${encodeURIComponent(pet.petName)}`; }}
+                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x300/F0F4F8/333?text=${encodeURIComponent(item.title)}`; }}
               />
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{pet.petName} - {pet.type}</h3>
-                <p className="text-gray-700 text-base mb-2">Breed: {pet.breed}</p>
-                <p className="text-gray-600 text-sm mb-4">{pet.details}</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-700 text-base mb-4">{item.description}</p>
                 <button
-                  onClick={() => showNotification(`Viewing ${pet.petName}'s full profile... (Not implemented)`)}
+                  onClick={() => setCurrentPage(item.linkPage)}
                   className="mt-2 bg-purple-500 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-600 transition-colors duration-200"
                 >
-                  Learn More
+                  {item.linkText}
                 </button>
               </div>
             </div>
@@ -182,7 +197,7 @@ function HomePage({ setCurrentPage, showNotification }) {
         </div>
       </div>
 
-      {/* Call to Action - Join Community */}
+      {/* Call to Action - Join Community (kept as is) */}
       <div className={`container mx-auto mt-16 bg-gradient-to-r from-purple-500 to-pink-500 p-10 rounded-3xl shadow-2xl text-center text-white transition-all duration-1000 delay-500 ${showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
         <h3 className="text-4xl font-extrabold mb-4">Join Our Community!</h3>
         <p className="text-xl mb-6">Connect with fellow pet enthusiasts and share your love for animals.</p>
@@ -278,7 +293,7 @@ function VetServicesPage({ showNotification }) {
 
     try {
       let chatHistory = [];
-      chatHistory.push({ role: "user", parts: [{ text: `Provide general pet care advice for the following question: ${chatInput}. Keep it concise and emphasize that this is not a substitute for professional veterinary advice.` }] });
+      chatHistory.push({ role: "user", parts: [{ text: `Provide general pet care advice for the following question: ${chatInput}. Keep it concise and emphasize that this is not a substitute for professional veterinary consultation.` }] });
       const payload = { contents: chatHistory };
       const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
@@ -422,12 +437,10 @@ function VetServicesPage({ showNotification }) {
 function PetProductsPage({ cart, setCart, showNotification }) {
   // Pet Products data (moved here for encapsulation)
   const products = [
-    { id: 1, name: 'Premium Dog Food', price: 2800, description: 'Nutritious and delicious food for your canine companion.', image: 'https://images.unsplash.com/photo-1588523023023-3b2d1d0f8c8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxkb2clMjBmb29kfGVufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'Keep your feline friend entertained for hours.', image: 'https://images.unsplash.com/photo-1627916568474-0f2c0f0f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxjYXQlMjB0b3l8ZW58MHx8fHwxNzE5OTQ5NjQyfDB&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'A cozy and soft bed for ultimate pet relaxation.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxkb2clMjBiZWR8ZW5ufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'Everything you need for a well-groomed pet.', image: 'https://images.unsplash.com/photo-1583337130417-ab7e22d7a3d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxwZXQlMjBncm9vbWluZyUyMGtpdHxlbnwwfHx8fDE3MTk5NDk2NDJ8MA&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 5, name: 'Bird Seed Mix', price: 450, description: 'High-quality seed mix for various bird species.', image: 'https://images.unsplash.com/photo-1588523023023-3b2d1d0f8c8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxiaXJkJTIwc2VlZHxlbnwwfHx8fDE3MTk5NDk2NDJ8MA&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquarium with beautiful decorations.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxmaXNoJTIwdGFuayUyMGRlY29yfGVufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'A vibrant, feather-filled toy designed to stimulate your cat\'s natural hunting instincts and provide endless hours of playful engagement.', image: 'https://images.unsplash.com/photo-1627916568474-0f2c0f0f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxjYXQlMjB0b3l8ZW58MHx8fHwxNzE5OTQ5NjQyfDB&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'Luxurious and orthopedic pet bed, crafted with memory foam for superior comfort and support, ensuring your furry friend gets the best rest.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxkb2clMjBiZWR8ZW5ufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'An all-in-one grooming solution with professional-grade brushes, combs, and clippers to keep your pet\'s coat healthy, shiny, and tangle-free.', image: 'https://images.unsplash.com/photo-1583337130417-ab7e22d7a3d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxwZXQlMjBncm9vbWluZyUyMGtpdHxlbnwwfHx8fDE3MTk5NDk2NDJ8MA&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxmaXNoJTIwdGFuayUyMGRlY29yfGVufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
   ];
 
   // Function to add item to cart
@@ -565,6 +578,7 @@ function PetProductsPage({ cart, setCart, showNotification }) {
 function ContactUsPage({ showNotification }) {
   // Removed formData state and handleChange/handleSubmit functions
   const CONTACT_EMAIL = 'cbee69a@gmail.com';
+  const CONTACT_PHONE = '+91 9019301910'; // Updated mobile number
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 p-8">
@@ -574,13 +588,20 @@ function ContactUsPage({ showNotification }) {
         </h2>
         <div className="bg-white p-8 rounded-3xl shadow-xl max-w-3xl mx-auto text-center">
           <p className="text-lg text-gray-700 mb-8">
-            For any inquiries, please email us directly:
+            For any inquiries, please reach us via email or phone:
           </p>
 
-          <p className="text-2xl font-bold text-gray-900 flex items-center justify-center mb-6">
+          <p className="text-2xl font-bold text-gray-900 flex items-center justify-center mb-4">
             <Mail className="mr-3 text-pink-600" size={30} />
             <a href={`mailto:${CONTACT_EMAIL}`} className="text-purple-600 hover:underline">
               {CONTACT_EMAIL}
+            </a>
+          </p>
+
+          <p className="text-2xl font-bold text-gray-900 flex items-center justify-center mb-6">
+            <Phone className="mr-3 text-pink-600" size={30} />
+            <a href={`tel:${CONTACT_PHONE.replace(/\s/g, '')}`} className="text-purple-600 hover:underline">
+              {CONTACT_PHONE}
             </a>
           </p>
 
@@ -614,8 +635,6 @@ function ContactUsPage({ showNotification }) {
 function PolicyPage({ showNotification }) {
   // Directly embed the policy text
   const policyText = `
-    --- PAGE 1 ---
-
     OVERVIEW
 
     Terms of service
@@ -660,9 +679,6 @@ function PolicyPage({ showNotification }) {
      services in our online stores. However, please note that colors or product appearance
      may differ from how they may appear on your screen due to the type of device you use
      to access the store and your device settings and configuration.
-
-
-    --- PAGE 2 ---
 
     We do not warrant that the appearance or quality of any products or services purchased
      by you will meet your expectations or be the same as depicted or rendered in our online
@@ -712,9 +728,6 @@ function PolicyPage({ showNotification }) {
      (iv) you will pay charges incurred by you at the posted prices, including shipping and
      handling charges and all applicable taxes, if any.
 
-
-    --- PAGE 3 ---
-
     SECTION 5 - SHIPPING AND DELIVERY
 
     We are not liable for shipping and delivery delays. All delivery times are estimates only
@@ -759,9 +772,6 @@ function PolicyPage({ showNotification }) {
      We may also, in the future, offer new features through the Services (including the
      release of new tools and resources). Such new features shall also be deemed part of
      the Services and are subject to these Terms of Service.
-
-
-    --- PAGE 4 ---
 
     SECTION 8 - THIRD-PARTY LINKS
 
@@ -811,9 +821,6 @@ function PolicyPage({ showNotification }) {
      feedback, reviews, proposals, plans, or other content (collectively, "Feedback"), you
      grant us a perpetual, worldwide, sublicensable, royalty-free license to use, reproduce,
      modify, publish, distribute and display such Feedback in any medium for any purpose,
-
-
-    --- PAGE 5 ---
 
     including for commercial use. We may, for example, use our rights under this license to
      operate, provide, evaluate, enhance, improve and promote the Services and to perform
@@ -1319,19 +1326,22 @@ function PolicyPage({ showNotification }) {
     formattedText = formattedText.replace(/(\S)\n(\S)/g, '$1 $2');
 
     // Replace multiple newlines with a single paragraph break, then wrap in <p>
+    // This handles actual paragraph breaks
     formattedText = formattedText.replace(/\n\s*\n+/g, '</p><p>');
 
-    // Replace SECTION headings with bolded h3 and add a margin-bottom for gap
-    formattedText = formattedText.replace(/SECTION (\d+) - (.*?)(?=<p>|$)/g, '</h3><h3 class="font-bold mb-4 mt-8">SECTION $1 - $2</h3><p>');
+    // Convert SECTION headings to bolded h3 with margin-bottom for gap
+    // This regex looks for "SECTION X - YYY" and captures the number and title.
+    // It also ensures a new paragraph starts after the heading.
+    formattedText = formattedText.replace(/(SECTION \d+ - .*?)(?=<p>|$)/g, '</h3><h3 class="font-bold mb-4 mt-8">$1</h3><p>');
 
     // Handle bullet points - convert lines starting with '•' to list items
+    // This is a more robust way to handle lists.
     formattedText = formattedText.replace(/<p>•\s*(.*?)<\/p>/g, '<li>$1</li>');
-    // Wrap consecutive list items in a ul tag
-    formattedText = formattedText.replace(/<\/li>\s*<li>/g, '</li><li>'); // Join consecutive list items
     formattedText = formattedText.replace(/<li>(.*?)<\/li>/g, '<ul><li>$1</li></ul>'); // Wrap in ul if not already
+    formattedText = formattedText.replace(/<\/ul>\s*<ul>/g, ''); // Fix for multiple ul tags if consecutive lists
 
     // Add initial paragraph tag if content doesn't start with a heading or list
-    if (!formattedText.startsWith('<h3') && !formattedText.startsWith('<ul>')) {
+    if (!formattedText.startsWith('<h3') && !formattedText.startsWith('<ul>') && formattedText.trim().length > 0) {
       formattedText = `<p>${formattedText}</p>`;
     }
 
@@ -1340,6 +1350,7 @@ function PolicyPage({ showNotification }) {
     formattedText = formattedText.replace(/<p>\s*<ul>/g, '<ul>'); // Fix list spacing after p tag
     formattedText = formattedText.replace(/<\/ul>\s*<p>/g, '</ul>'); // Fix list spacing before p tag
     formattedText = formattedText.replace(/<p>\s*<h3/g, '<h3'); // Fix heading spacing after p tag
+    formattedText = formattedText.replace(/<p>\s*Contact details/g, '<p>• Contact details'); // Fix for specific bullet point
 
     return formattedText;
   };
