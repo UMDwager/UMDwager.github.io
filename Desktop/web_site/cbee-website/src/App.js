@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, PawPrint, ShoppingCart, X, Plus, Minus, CheckCircle, MapPin, Shield, Phone, Info, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Home, PawPrint, ShoppingCart, X, Plus, Minus, CheckCircle, MapPin, Shield, Phone, Mail } from 'lucide-react';
 
 // Notification Modal Component
 const NotificationModal = ({ message, show }) => {
