@@ -422,7 +422,7 @@ function PetProductsPage({ cart, setCart, showNotification }) {
     { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'A vibrant, feather-filled toy designed to stimulate your cat\'s natural hunting instincts and provide endless hours of playful engagement.', image: 'https://bing.com/th/id/BCO.b6395632-57e2-49a7-b762-acf9b442a1f8.png' },
     { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'Luxurious and orthopedic pet bed, crafted with memory foam for superior comfort and support, ensuring your furry friend gets the best rest.', image: 'https://bing.com/th/id/BCO.a1e85a7f-e8d0-4d39-9a46-0bc009d1cb6c.png' },
     { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'An all-in-one grooming solution with professional-grade brushes, combs, and clippers to keep your pet\'s coat healthy, shiny, and tangle-free.', image: 'https://bing.com/th/id/BCO.8cf643d5-6f6e-43f9-b9b2-fa93822f28da.png' },
-    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://bing.com/th/id/BCO.cca81caa-c36b-4374-af7d-12b5e31d7a61.pngs' },
+    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://bing.com/th/id/BCO.cca81caa-c36b-4374-af7d-12b5e31d7a61.png' },
   ];
 
   // Function to add item to cart
