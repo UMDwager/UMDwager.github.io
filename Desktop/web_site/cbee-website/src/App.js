@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, PawPrint, ShoppingCart, X, Plus, Minus, CheckCircle, MapPin, Shield, Phone, Mail } from 'lucide-react';
+import { Home, PawPrint, ShoppingCart, X, Plus, Minus, CheckCircle, MapPin, Shield, Phone, Mail} from 'lucide-react';
 
 // Notification Modal Component
 const NotificationModal = ({ message, show }) => {
@@ -128,7 +128,7 @@ function HomePage({ setCurrentPage, showNotification }) {
   const homeContent = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1583511655099-e616f2c3b2b2?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      image: 'https://bing.com/th/id/BCO.3d9f6caf-72b9-45fb-af42-31b86e04e62c.png',
       title: 'Expert Vet Care',
       description: 'Find trusted veterinarians near you for all your pet\'s health needs. Book appointments easily and get quick advice.',
       linkText: 'Find a Vet',
@@ -136,15 +136,15 @@ function HomePage({ setCurrentPage, showNotification }) {
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1548199973-03cce0fd87b0?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Shop Premium Pet Products',
+      image: 'https://bing.com/th/id/BCO.3d232107-7054-4a85-bc6f-26fbc8f27afb.png',
+      title: 'Shop Pet Products',
       description: 'Explore a wide range of high-quality food, toys, and accessories for your beloved companions.',
       linkText: 'Visit Pet Shop',
       linkPage: 'pet-products'
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1596492784531-eeaa87491744?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      image: 'https://bing.com/th/id/BCO.a2685e39-f73b-40f1-9312-649642f73624.png',
       title: 'Connect with Pet Lovers',
       description: 'Join our vibrant community to share stories, tips, and connect with fellow pet enthusiasts.',
       linkText: 'Join Community',
@@ -195,18 +195,6 @@ function HomePage({ setCurrentPage, showNotification }) {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Call to Action - Join Community (kept as is) */}
-      <div className={`container mx-auto mt-16 bg-gradient-to-r from-purple-500 to-pink-500 p-10 rounded-3xl shadow-2xl text-center text-white transition-all duration-1000 delay-500 ${showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
-        <h3 className="text-4xl font-extrabold mb-4">Join Our Community!</h3>
-        <p className="text-xl mb-6">Connect with fellow pet enthusiasts and share your love for animals.</p>
-        <button
-          onClick={() => showNotification('Sign up feature coming soon!')}
-          className="bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-white"
-        >
-          Sign Up Now
-        </button>
       </div>
     </div>
   );
@@ -1119,7 +1107,7 @@ function PolicyPage({ showNotification }) {
     • Provide, Tailor, and Improve the Services. We use your personal information
      to provide you with the Services, including to perform our contract with you, to
      process your payments, to fulfill your orders, to remember your preferences and
-     items you are interested in, to send notifications to you related to your account, to
+     items you are interested in in, to send notifications to you related to your account, to
 
 
     --- PAGE 11 ---
