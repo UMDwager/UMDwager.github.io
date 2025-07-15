@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, PawPrint, ShoppingCart, X, Plus, Minus, CheckCircle, MapPin, Shield, Phone, Mail} from 'lucide-react';
+import { Home, PawPrint, ShoppingCart, X, Plus, Minus, CheckCircle, MapPin, Shield, Phone, Info, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
 
 // Notification Modal Component
 const NotificationModal = ({ message, show }) => {
@@ -124,7 +124,7 @@ function HomePage({ setCurrentPage, showNotification }) {
     setShowContent(true);
   }, []);
 
-  // Updated Home Page Content
+  // Updated Home Page Content with Unsplash images
   const homeContent = [
     {
       id: 1,
@@ -141,14 +141,6 @@ function HomePage({ setCurrentPage, showNotification }) {
       description: 'Explore a wide range of high-quality food, toys, and accessories for your beloved companions.',
       linkText: 'Visit Pet Shop',
       linkPage: 'pet-products'
-    },
-    {
-      id: 3,
-      image: 'https://bing.com/th/id/BCO.a2685e39-f73b-40f1-9312-649642f73624.png',
-      title: 'Connect with Pet Lovers',
-      description: 'Join our vibrant community to share stories, tips, and connect with fellow pet enthusiasts.',
-      linkText: 'Join Community',
-      linkPage: 'home' // Stays on home, but could link to a future community page
     }
   ];
 
@@ -169,25 +161,27 @@ function HomePage({ setCurrentPage, showNotification }) {
         <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-10">
           Discover <span className="text-pink-600">Our Services & Products</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Adjusted grid/flex for spacing and positioning */}
+        <div className="flex flex-col md:flex-row justify-center items-stretch gap-x-24 gap-y-8 mt-8 w-full">
           {homeContent.map((item, index) => (
             <div
               key={item.id}
-              className={`bg-white rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 delay-${index * 100} hover:scale-105`}
+              className={`bg-white p-6 rounded-3xl shadow-xl overflow-hidden transform transition-all duration-700 delay-${index * 100} hover:scale-105
+              w-80 flex flex-col justify-between`}
               style={{ opacity: showContent ? 1 : 0, transform: showContent ? 'translateY(0)' : 'translateY(20px)' }}
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-64 object-cover rounded-t-3xl"
+                className="w-full h-48 object-cover rounded-t-3xl mb-4"
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x300/F0F4F8/333?text=${encodeURIComponent(item.title)}`; }}
               />
-              <div className="p-6">
+              <div className="p-0 flex flex-col flex-grow">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-700 text-base mb-4">{item.description}</p>
+                <p className="text-gray-700 text-base mb-4 flex-grow">{item.description}</p>
                 <button
                   onClick={() => setCurrentPage(item.linkPage)}
-                  className="mt-2 bg-purple-500 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-600 transition-colors duration-200"
+                  className="mt-auto bg-purple-500 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-600 transition-colors duration-200"
                 >
                   {item.linkText}
                 </button>
@@ -281,7 +275,7 @@ function VetServicesPage({ showNotification }) {
 
     try {
       let chatHistory = [];
-      chatHistory.push({ role: "user", parts: [{ text: `Provide general pet care advice for the following question: ${chatInput}. Keep it concise and emphasize that this is not a substitute for professional veterinary consultation.` }] });
+      chatHistory.push({ role: "user", parts: [{ text: `Provide general pet care advice for the following question: ${chatInput}. Keep it concise and emphasize that this is not a substitute for professional veterinary advice.` }] });
       const payload = { contents: chatHistory };
       const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
@@ -425,10 +419,10 @@ function VetServicesPage({ showNotification }) {
 function PetProductsPage({ cart, setCart, showNotification }) {
   // Pet Products data (moved here for encapsulation)
   const products = [
-    { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'A vibrant, feather-filled toy designed to stimulate your cat\'s natural hunting instincts and provide endless hours of playful engagement.', image: 'https://images.unsplash.com/photo-1627916568474-0f2c0f0f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxjYXQlMjB0b3l8ZW58MHx8fHwxNzE5OTQ5NjQyfDB&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'Luxurious and orthopedic pet bed, crafted with memory foam for superior comfort and support, ensuring your furry friend gets the best rest.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxkb2clMjBiZWR8ZW5ufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'An all-in-one grooming solution with professional-grade brushes, combs, and clippers to keep your pet\'s coat healthy, shiny, and tangle-free.', image: 'https://images.unsplash.com/photo-1583337130417-ab7e22d7a3d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxwZXQlMjBncm9vbWluZyUyMGtpdHxlbnwwfHx8fDE3MTk5NDk2NDJ8MA&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxmaXNoJTIwdGFuayUyMGRlY29yfGVufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'A vibrant, feather-filled toy designed to stimulate your cat\'s natural hunting instincts and provide endless hours of playful engagement.', image: 'https://bing.com/th/id/BCO.b6395632-57e2-49a7-b762-acf9b442a1f8.png' },
+    { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'Luxurious and orthopedic pet bed, crafted with memory foam for superior comfort and support, ensuring your furry friend gets the best rest.', image: 'https://bing.com/th/id/BCO.a1e85a7f-e8d0-4d39-9a46-0bc009d1cb6c.png' },
+    { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'An all-in-one grooming solution with professional-grade brushes, combs, and clippers to keep your pet\'s coat healthy, shiny, and tangle-free.', image: 'https://bing.com/th/id/BCO.8cf643d5-6f6e-43f9-b9b2-fa93822f28da.png' },
+    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://bing.com/th/id/BCO.cca81caa-c36b-4374-af7d-12b5e31d7a61.pngs' },
   ];
 
   // Function to add item to cart
@@ -892,7 +886,7 @@ function PolicyPage({ showNotification }) {
     The information presented on or through the Services is made available solely for
      general information purposes. We do not warrant the accuracy, completeness, or
      usefulness of this information. Any reliance you place on such information is strictly at
-     your own risk. We disclaim all liability and responsibility arising from any reliance placed
+     own risk. We disclaim all liability and responsibility arising from any reliance placed
      on such materials by you or any other visitor to the Services, or by anyone who may be
      informed of any of its contents.
 
@@ -1013,8 +1007,6 @@ function PolicyPage({ showNotification }) {
     SECTION 24 - CONTACT INFORMATION
 
 
-    --- PAGE 9 ---
-
     Questions about the Terms of Service should be sent to us at Email id :
      cbee69a@gmail.com.
 
@@ -1050,27 +1042,16 @@ function PolicyPage({ showNotification }) {
      from this personal information, depending on how you interact with the Services, where
      you live, and as permitted or required by applicable law:
 
-
-    --- PAGE 10 ---
-
-    •
-
-    •
-
-    •
-
-    •
-
-    Contact details including your name, address, billing address, shipping address,
+    • Contact details including your name, address, billing address, shipping address,
      phone number, and email address.
 
-    Financial information including credit card, debit card, and financial account
+    • Financial information including credit card, debit card, and financial account
      numbers, payment card information, financial account information, transaction
      details, form of payment, payment confirmation and other payment details.
      Account information including your username, password, security questions,
      preferences and settings.
 
-    Transaction information including the items you view, put in your cart, add to
+    • Transaction information including the items you view, put in your cart, add to
      your wishlist, or purchase, return, exchange or cancel and your past transactions.
      Communications with us including the information you include in
 
@@ -1109,11 +1090,6 @@ function PolicyPage({ showNotification }) {
      process your payments, to fulfill your orders, to remember your preferences and
      items you are interested in in, to send notifications to you related to your account, to
 
-
-    --- PAGE 11 ---
-
-    •
-
     process purchases, returns, exchanges or other transactions, to create, maintain
      and otherwise manage your account, to arrange for shipping, to facilitate any
      returns and exchanges, to enable you to post reviews, and to create a
@@ -1121,7 +1097,7 @@ function PolicyPage({ showNotification }) {
      related to your purchases. This may include using your personal information to
      better tailor and improve the Services.
 
-    Marketing and Advertising. We use your personal information for marketing
+    • Marketing and Advertising. We use your personal information for marketing
      and promotional purposes, such as to send marketing, advertising and
      promotional communications by email, text message or postal mail, and to show
      you online advertisements for products or services on the Services or other
@@ -1156,26 +1132,21 @@ function PolicyPage({ showNotification }) {
      (e.g. IT management, payment processing, data analytics, customer support,
      cloud storage, fulfillment and shipping).
 
-    With business and marketing partners to provide marketing services and
+    • With business and marketing partners to provide marketing services and
      advertise to you. Our business and marketing partners will use your information
      in accordance with their own privacy notices. Depending on where you reside,
-
-
-    --- PAGE 12 ---
-
-    •
 
     you may have a right to direct us not to share information about you to show you
      targeted advertisements and marketing based on your online activity with
      different merchants and websites..
 
-    When you direct, request us or otherwise consent to our disclosure of certain
+    • When you direct, request us or otherwise consent to our disclosure of certain
      information to third parties, such as to ship you products or through your use of
      social media widgets or login integrations.
 
-    With our affiliates or otherwise within our corporate group.
+    • With our affiliates or otherwise within our corporate group.
 
-    In connection with a business transaction such as a merger or bankruptcy, to
+    • In connection with a business transaction such as a merger or bankruptcy, to
      comply with any applicable legal obligations (including to respond to subpoenas,
      search warrants and similar requests), to enforce any applicable terms of service
      or policies, and to protect or defend the Services, our rights, and the rights of our
@@ -1207,9 +1178,6 @@ function PolicyPage({ showNotification }) {
     The Services are not intended to be used by children, and we do not knowingly collect
      any personal information about children under the age of majority in your jurisdiction. If
      you are the parent or guardian of a child who has provided us with their personal
-
-
-    --- PAGE 13 ---
 
     information, you may contact us using the contact details set out below to request that it
      be deleted.As of the Effective Date of this Privacy Policy, we do not have actual
@@ -1248,16 +1216,11 @@ function PolicyPage({ showNotification }) {
      information we hold about you and to request that we transfer it to a third party, in
      certain circumstances and with certain exceptions.
 
-    •
-
-    Managing Communication Preferences. We may send you promotional emails,
+    • Managing Communication Preferences. We may send you promotional emails,
      and you may opt out of receiving these at any time by using the unsubscribe
      option displayed in our emails to you. If you opt out, we may still send you
      non-promotional emails, such as those about your account or orders that you
      have made.
-
-
-    --- PAGE 14 ---
 
     You may exercise any of these rights where indicated on the Services or by contacting
      us using the contact details provided below.
@@ -1297,9 +1260,6 @@ function PolicyPage({ showNotification }) {
 
     Contact
 
-
-    --- PAGE 15 ---
-
     Should you have any questions about our privacy practices or this Privacy Policy, or if
      you would like to exercise any of the rights available to you, please call or email us at
      cbee69a@gmail.com
@@ -1310,12 +1270,12 @@ function PolicyPage({ showNotification }) {
     // Remove "--- PAGE X ---" markers
     let formattedText = text.replace(/---\s*PAGE\s*\d+\s*---/g, '');
 
-    // Replace single newlines with a space, but keep double newlines for paragraphs
-    formattedText = formattedText.replace(/(\S)\n(\S)/g, '$1 $2');
-
     // Replace multiple newlines with a single paragraph break, then wrap in <p>
     // This handles actual paragraph breaks
     formattedText = formattedText.replace(/\n\s*\n+/g, '</p><p>');
+
+    // Replace single newlines with a space, but keep double newlines for paragraphs
+    formattedText = formattedText.replace(/(\S)\n(\S)/g, '$1 $2');
 
     // Convert SECTION headings to bolded h3 with margin-bottom for gap
     // This regex looks for "SECTION X - YYY" and captures the number and title.
