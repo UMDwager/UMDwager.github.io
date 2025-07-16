@@ -18,13 +18,13 @@ const NotificationModal = ({ message, show }) => {
   );
 };
 
-// Simulated Payment Modal Component - Now conditionally rendered and used only if needed
+// Removed Simulated Payment Modal Component as it's no longer used
+/*
 const PaymentModal = ({ isOpen, onClose, onConfirm, bookingFee, vetName }) => {
   if (!isOpen) return null;
 
   return (
     <div
-      // Corrected: Use 'isOpen' prop to control visibility class
       className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ${
         isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
@@ -56,6 +56,7 @@ const PaymentModal = ({ isOpen, onClose, onConfirm, bookingFee, vetName }) => {
     </div>
   );
 };
+*/
 
 // Navbar Component
 const Navbar = ({ setCurrentPage, currentPage }) => (
@@ -124,8 +125,8 @@ function HomePage({ setCurrentPage, showNotification }) {
   const homeContent = [
     {
       id: 2, // Changed ID to reflect removal of previous item 1
-      image: 'https://images.unsplash.com/photo-1548199973-03cce0fd87b0?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Shop Premium Pet Products',
+      image: 'https://bing.com/th/id/BCO.3d232107-7054-4a85-bc6f-26fbc8f27afb.png',
+      title: 'Shop Pet Products',
       description: 'Explore a wide range of high-quality food, toys, and accessories for your beloved companions.',
       linkText: 'Visit Pet Shop',
       linkPage: 'pet-products'
@@ -186,10 +187,10 @@ function HomePage({ setCurrentPage, showNotification }) {
 function PetProductsPage({ cart, setCart, showNotification }) {
   // Pet Products data (moved here for encapsulation)
   const products = [
-    { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'A vibrant, feather-filled toy designed to stimulate your cat\'s natural hunting instincts and provide endless hours of playful engagement.', image: 'https://images.unsplash.com/photo-1627916568474-0f2c0f0f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxjYXQlMjB0b3l8ZW58MHx8fHwxNzE5OTQ5NjQyfDB&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'Luxurious and orthopedic pet bed, crafted with memory foam for superior comfort and support, ensuring your furry friend gets the best rest.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxkb2clMjBiZWR8ZW5ufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'An all-in-one grooming solution with professional-grade brushes, combs, and clippers to keep your pet\'s coat healthy, shiny, and tangle-free.', image: 'https://images.unsplash.com/photo-1583337130417-ab7e22d7a3d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxwZXQlMjBncm9vbWluZyUyMGtpdHxlbnwwfHx8fDE3MTk5NDk2NDJ8MA&ixlib=rb-4.0.3&q=80&w=1080' },
-    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxmaXNoJTIwdGFuayUyMGRlY29yfGVufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'A vibrant, feather-filled toy designed to stimulate your cat\'s natural hunting instincts and provide endless hours of playful engagement.', image: 'https://bing.com/th/id/BCO.b6395632-57e2-49a7-b762-acf9b442a1f8.png' },
+    { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'Luxurious and orthopedic pet bed, crafted with memory foam for superior comfort and support, ensuring your furry friend gets the best rest.', image: 'https://bing.com/th/id/BCO.a1e85a7f-e8d0-4d39-9a46-0bc009d1cb6c.png' },
+    { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'An all-in-one grooming solution with professional-grade brushes, combs, and clippers to keep your pet\'s coat healthy, shiny, and tangle-free.', image: 'https://bing.com/th/id/BCO.8cf643d5-6f6e-43f9-b9b2-fa93822f28da.png' },
+    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://bing.com/th/id/BCO.cca81caa-c36b-4374-af7d-12b5e31d7a61.png' },
   ];
 
   // Function to add item to cart
