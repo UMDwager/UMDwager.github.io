@@ -125,7 +125,7 @@ function HomePage({ setCurrentPage, showNotification }) {
   const homeContent = [
     {
       id: 2, // Changed ID to reflect removal of previous item 1
-      image: 'https://bing.com/th/id/BCO.3d232107-7054-4a85-bc6f-26fbc8f27afb.png',
+      image: 'https://bing.com/th/id/BCO.4c399d59-9daa-4bf5-8aff-12121af92dc9.png',
       title: 'Shop Pet Products',
       description: 'Explore a wide range of high-quality accessories for your beloved companions.',
       linkText: 'Visit Pet Shop',
