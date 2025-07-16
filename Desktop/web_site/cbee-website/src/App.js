@@ -127,7 +127,7 @@ function HomePage({ setCurrentPage, showNotification }) {
       id: 2, // Changed ID to reflect removal of previous item 1
       image: 'https://bing.com/th/id/BCO.3d232107-7054-4a85-bc6f-26fbc8f27afb.png',
       title: 'Shop Pet Products',
-      description: 'Explore a wide range of high-quality food, toys, and accessories for your beloved companions.',
+      description: 'Explore a wide range of high-quality accessories for your beloved companions.',
       linkText: 'Visit Pet Shop',
       linkPage: 'pet-products'
     }
@@ -141,14 +141,14 @@ function HomePage({ setCurrentPage, showNotification }) {
           Welcome to <span className="text-pink-600">Cbee</span>!
         </h1>
         <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto">
-          Your adorable hub for all things pets. Discover, connect, and share the love!
+          Your adorable hub for all things pets.
         </p>
       </div>
 
       {/* Dynamic Scroll Section - Featured Content */}
       <div className={`container mx-auto mt-12 transition-all duration-1000 delay-300 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-10">
-          Discover <span className="text-pink-600">Our Services & Products</span>
+          Discover <span className="text-pink-600">Products</span>
         </h2>
         {/* Adjusted flex for spacing and positioning */}
         <div className="flex flex-col md:flex-row justify-center items-stretch gap-x-24 gap-y-8 mt-8 w-full">
