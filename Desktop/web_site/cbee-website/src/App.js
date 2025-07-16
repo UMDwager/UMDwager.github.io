@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, PawPrint, ShoppingCart, X, Plus, Minus, CheckCircle, MapPin, Shield, Phone, Mail } from 'lucide-react';
+import { Home, ShoppingCart, X, Plus, Minus, CheckCircle, Shield, Phone, Mail } from 'lucide-react'; // Removed unused icons (PawPrint, MapPin, Info, Facebook, Instagram, Twitter)
 
 // Notification Modal Component
 const NotificationModal = ({ message, show }) => {
@@ -18,12 +18,17 @@ const NotificationModal = ({ message, show }) => {
   );
 };
 
-// Simulated Payment Modal Component
+// Simulated Payment Modal Component - Now conditionally rendered and used only if needed
 const PaymentModal = ({ isOpen, onClose, onConfirm, bookingFee, vetName }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div
+      // Corrected: Use 'isOpen' prop to control visibility class
+      className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ${
+        isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
+    >
       <div className="bg-black bg-opacity-50 absolute inset-0"></div>
       <div className="bg-white p-8 rounded-xl shadow-2xl z-10 max-w-md w-full text-center transform scale-100 transition-transform duration-300">
         <h3 className="text-3xl font-bold text-gray-900 mb-4">Confirm Appointment</h3>
@@ -70,16 +75,7 @@ const Navbar = ({ setCurrentPage, currentPage }) => (
             <Home className="mr-2" size={20} /> Home
           </button>
         </li>
-        <li>
-          <button
-            onClick={() => setCurrentPage('vet-services')}
-            className={`flex items-center text-white text-lg font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-300 ${
-              currentPage === 'vet-services' ? 'bg-purple-500' : ''
-            }`}
-          >
-            <PawPrint className="mr-2" size={20} /> Vet Services
-          </button>
-        </li>
+        {/* Vet Services button removed as the page is removed */}
         <li>
           <button
             onClick={() => setCurrentPage('pet-products')}
@@ -127,17 +123,9 @@ function HomePage({ setCurrentPage, showNotification }) {
   // Updated Home Page Content with Unsplash images
   const homeContent = [
     {
-      id: 1,
-      image: 'https://bing.com/th/id/BCO.3d9f6caf-72b9-45fb-af42-31b86e04e62c.png',
-      title: 'Expert Vet Care',
-      description: 'Find trusted veterinarians near you for all your pet\'s health needs. Book appointments easily and get quick advice.',
-      linkText: 'Find a Vet',
-      linkPage: 'vet-services'
-    },
-    {
-      id: 2,
-      image: 'https://bing.com/th/id/BCO.3d232107-7054-4a85-bc6f-26fbc8f27afb.png',
-      title: 'Shop Pet Products',
+      id: 2, // Changed ID to reflect removal of previous item 1
+      image: 'https://images.unsplash.com/photo-1548199973-03cce0fd87b0?auto=format&fit=crop&q=80&w=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      title: 'Shop Premium Pet Products',
       description: 'Explore a wide range of high-quality food, toys, and accessories for your beloved companions.',
       linkText: 'Visit Pet Shop',
       linkPage: 'pet-products'
@@ -161,7 +149,7 @@ function HomePage({ setCurrentPage, showNotification }) {
         <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-10">
           Discover <span className="text-pink-600">Our Services & Products</span>
         </h2>
-        {/* Adjusted grid/flex for spacing and positioning */}
+        {/* Adjusted flex for spacing and positioning */}
         <div className="flex flex-col md:flex-row justify-center items-stretch gap-x-24 gap-y-8 mt-8 w-full">
           {homeContent.map((item, index) => (
             <div
@@ -194,235 +182,14 @@ function HomePage({ setCurrentPage, showNotification }) {
   );
 }
 
-// Vet Services Page Component
-function VetServicesPage({ showNotification }) {
-  const [selectedLocation, setSelectedLocation] = useState('All');
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  const [selectedVet, setSelectedVet] = useState(null);
-  const [chatInput, setChatInput] = useState('');
-  const [chatResponse, setChatResponse] = useState('');
-  const [isLoadingChat, setIsLoadingChat] = useState(false);
-
-  const BOOKING_FEE = 50; // Define the booking fee
-
-  // Vet Data (moved here for encapsulation)
-  const vets = [
-    // Mumbai Vets
-    { id: 1, name: 'Dr. Priya Sharma', specialty: 'Canine Health', location: 'Mumbai', image: 'https://placehold.co/100x100/A7F3D0/10B981?text=Dr.+Sharma', description: 'Experienced in dog behavior and general health.' },
-    { id: 5, name: 'Dr. Rahul Kumar', specialty: 'Small Animal Medicine', location: 'Mumbai', image: 'https://placehold.co/100x100/BFDBFE/3B82F6?text=Dr.+Kumar', description: 'Expert in internal medicine for small animals.' },
-    { id: 6, name: 'Dr. Sneha Patel', specialty: 'Dermatology', location: 'Mumbai', image: 'https://placehold.co/100x100/FFEDD5/F97316?text=Dr.+Patel', description: 'Specializes in skin and coat conditions.' },
-    { id: 7, name: 'Dr. Arjun Reddy', specialty: 'Orthopedics', location: 'Mumbai', image: 'https://placehold.co/100x100/FECACA/EF4444?text=Dr.+Reddy', description: 'Focuses on bone and joint health.' },
-    { id: 8, name: 'Dr. Meera Desai', specialty: 'Preventive Care', location: 'Mumbai', image: 'https://placehold.co/100x100/D1FAE5/047857?text=Dr.+Desai', description: 'Dedicated to vaccinations and routine check-ups.' },
-    { id: 9, name: 'Dr. Vikram Rao', specialty: 'Ophthalmology', location: 'Mumbai', image: 'https://placehold.co/100x100/E0F7FA/2196F3?text=Dr.+Rao', description: 'Specialist in eye health and vision care.' },
-
-    // Delhi Vets
-    { id: 2, name: 'Dr. Rohan Gupta', specialty: 'Feline Specialist', location: 'Delhi', image: 'https://placehold.co/100x100/BFDBFE/3B82F6?text=Dr.+Gupta', description: 'Dedicated to the well-being of cats of all ages.' },
-    { id: 10, name: 'Dr. Pooja Verma', specialty: 'Dental Care', location: 'Delhi', image: 'https://placehold.co/100x100/A7F3D0/10B981?text=Dr.+Verma', description: 'Provides comprehensive dental services for pets.' },
-    { id: 11, name: 'Dr. Sanjeev Singh', specialty: 'Cardiology', location: 'Delhi', image: 'https://placehold.co/100x100/FFEDD5/F97316?text=Dr.+Singh', description: 'Heart specialist for all types of pets.' },
-    { id: 12, name: 'Dr. Ritu Agarwal', specialty: 'Nutrition', location: 'Delhi', image: 'https://placehold.co/100x100/FECACA/EF4444?text=Dr.+Agarwal', description: 'Offers dietary advice and weight management plans.' },
-    { id: 13, name: 'Dr. Alok Yadav', specialty: 'Behavioral Therapy', location: 'Delhi', image: 'https://placehold.co/100x100/D1FAE5/047857?text=Dr.+Yadav', description: 'Helps with pet behavioral issues and training.' },
-    { id: 14, name: 'Dr. Neha Kapoor', specialty: 'Geriatric Care', location: 'Delhi', image: 'https://placehold.co/100x100/E0F7FA/2196F3?text=Dr.+Kapoor', description: 'Specialized care for senior pets.' },
-
-    // Bengaluru Vets
-    { id: 3, name: 'Dr. Anjali Singh', specialty: 'Exotic Pets', location: 'Bengaluru', image: 'https://placehold.co/100x100/FFEDD5/F97316?text=Dr.+Singh', description: 'Specializes in reptiles, birds, and small mammals.' },
-    { id: 15, name: 'Dr. Karthik Rao', specialty: 'Surgery', location: 'Bengaluru', image: 'https://placehold.co/100x100/A7F3D0/10B981?text=Dr.+Rao', description: 'Experienced surgeon for various pet procedures.' },
-    { id: 16, name: 'Dr. Divya Menon', specialty: 'Oncology', location: 'Bengaluru', image: 'https://placehold.co/100x100/BFDBFE/3B82F6?text=Dr.+Menon', description: 'Cancer treatment and support for pets.' },
-    { id: 17, name: 'Dr. Suresh Babu', specialty: 'Emergency Vet', location: 'Bengaluru', image: 'https://placehold.co/100x100/FECACA/EF4444?text=Dr.+Babu', description: 'Provides urgent and critical care services.' },
-    { id: 18, name: 'Dr. Deepika Sharma', specialty: 'Reproductive Health', location: 'Bengaluru', image: 'https://placehold.co/100x100/D1FAE5/047857?text=Dr.+Sharma', description: 'Focuses on breeding and reproductive issues.' },
-    { id: 19, name: 'Dr. Vishal Gowda', specialty: 'Acupuncture', location: 'Bengaluru', image: 'https://placehold.co/100x100/E0F7FA/2196F3?text=Dr.+Gowda', description: 'Alternative therapy for pain management.' },
-
-    // Chennai Vets
-    { id: 4, name: 'Dr. Vivek Kumar', specialty: 'Emergency Vet', location: 'Chennai', image: 'https://placehold.co/100x100/FECACA/EF4444?text=Dr.+Kumar', description: 'Available for urgent care and critical pet conditions.' },
-    { id: 20, name: 'Dr. Lakshmi Devi', specialty: 'Holistic Vet', location: 'Chennai', image: 'https://placehold.co/100x100/A7F3D0/10B981?text=Dr.+Devi', description: 'Integrative approach to pet health and wellness.' },
-    { id: 21, name: 'Dr. Bharath Raj', specialty: 'Internal Medicine', location: 'Chennai', image: 'https://placehold.co/100x100/BFDBFE/3B82F6?text=Dr.+Raj', description: 'Diagnoses and treats complex internal diseases.' },
-    { id: 22, name: 'Dr. Shanti Rao', specialty: 'Dermatology', location: 'Chennai', image: 'https://placehold.co/100x100/FFEDD5/F97316?text=Dr.+Rao', description: 'Specialist in skin allergies and conditions.' },
-    { id: 23, name: 'Dr. Murali Krishna', specialty: 'Pediatrics', location: 'Chennai', image: 'https://placehold.co/100x100/D1FAE5/047857?text=Dr.+Krishna', description: 'Specialized care for puppies and kittens.' },
-    { id: 24, name: 'Dr. Kavita Nair', specialty: 'Radiology', location: 'Chennai', image: 'https://placehold.co/100x100/E0F7FA/2196F3?text=Dr.+Nair', description: 'Expert in diagnostic imaging (X-rays, ultrasound).' },
-  ];
-
-  const locations = ['All', 'Mumbai', 'Delhi', 'Bengaluru', 'Chennai'];
-
-  const filteredVets = vets.filter(vet =>
-    selectedLocation === 'All' || vet.location === selectedLocation
-  );
-
-  const handleBookAppointmentClick = (vet) => {
-    setSelectedVet(vet);
-    setIsPaymentModalOpen(true);
-  };
-
-  const handlePaymentConfirm = () => {
-    setIsPaymentModalOpen(false);
-    showNotification(`Appointment with ${selectedVet.name} booked successfully! (₹${BOOKING_FEE.toFixed(2)} charged)`);
-    setSelectedVet(null); // Clear selected vet
-  };
-
-  const handlePaymentCancel = () => {
-    setIsPaymentModalOpen(false);
-    showNotification('Appointment booking cancelled.');
-    setSelectedVet(null); // Clear selected vet
-  };
-
-  // Function to call Gemini API for pet advice
-  const getPetAdvice = async () => {
-    if (!chatInput.trim()) {
-      setChatResponse('Please type your question.');
-      return;
-    }
-
-    setIsLoadingChat(true);
-    setChatResponse('Thinking...');
-
-    try {
-      let chatHistory = [];
-      chatHistory.push({ role: "user", parts: [{ text: `Provide general pet care advice for the following question: ${chatInput}. Keep it concise and emphasize that this is not a substitute for professional veterinary advice.` }] });
-      const payload = { contents: chatHistory };
-      const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const result = await response.json();
-      if (result.candidates && result.candidates.length > 0 &&
-          result.candidates[0].content && result.candidates[0].content.parts &&
-          result.candidates[0].content.parts.length > 0) {
-        const text = result.candidates[0].content.parts[0].text;
-        setChatResponse(text);
-      } else {
-        setChatResponse('Sorry, I could not get advice at this time. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error calling Gemini API:', error);
-      setChatResponse('An error occurred while fetching advice. Please try again later.');
-    } finally {
-      setIsLoadingChat(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-100 p-8">
-      <div className="container mx-auto">
-        <h2 className="text-5xl font-extrabold text-center text-gray-900 mb-12">
-          Find a <span className="text-pink-600">Vet Near You</span>
-        </h2>
-
-        {/* Location Selection */}
-        <div className="flex flex-col sm:flex-row items-center justify-center mb-10 gap-4">
-          <label htmlFor="location-select" className="text-xl font-medium text-gray-700">
-            Select Location:
-          </label>
-          <div className="relative w-full sm:w-auto">
-            <select
-              id="location-select"
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-              className="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-6 pr-10 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-lg"
-            >
-              {locations.map((loc) => (
-                <option key={loc} value={loc}>
-                  {loc}
-                </option>
-              ))}
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
-              <MapPin size={20} />
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredVets.length === 0 ? (
-            <p className="col-span-full text-center text-gray-600 text-xl">No vets found for this location.</p>
-          ) : (
-            filteredVets.map((vet) => (
-              <div key={vet.id} className="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2">
-                <div className="flex items-center justify-center bg-blue-100 rounded-full w-24 h-24 mx-auto mb-6 overflow-hidden">
-                  <img
-                    src={vet.image}
-                    alt={vet.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/100x100/BFDBFE/3B82F6?text=${encodeURIComponent(vet.name.split(' ').map(n => n[0]).join(''))}`; }}
-                  />
-                </div>
-                <h3 className="text-3xl font-bold text-gray-900 mb-2 text-center">{vet.name}</h3>
-                <p className="text-purple-600 text-xl font-semibold mb-3 text-center">{vet.specialty}</p>
-                <p className="text-gray-700 text-lg text-center mb-4">{vet.description}</p>
-                <p className="text-gray-500 text-md text-center flex items-center justify-center">
-                  <MapPin className="mr-2" size={18} /> {vet.location}
-                </p>
-                <div className="text-center mt-6">
-                  <button
-                    onClick={() => handleBookAppointmentClick(vet)}
-                    className="bg-purple-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-purple-700 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-purple-300"
-                  >
-                    Book Appointment
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-
-      {/* Quick Pet Advice Section (LLM Integration) */}
-      <div className="container mx-auto mt-16 bg-white p-8 rounded-3xl shadow-xl">
-        <h3 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
-          Quick <span className="text-pink-600">Pet Advice ✨</span>
-        </h3>
-        <p className="text-center text-gray-700 mb-6">
-          Ask a general question about pet care and get instant advice.
-          <br />
-          <span className="font-semibold text-red-500">Note: This advice is general and not a substitute for professional veterinary consultation.</span>
-        </p>
-        <div className="flex flex-col space-y-4">
-          <textarea
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            rows="4"
-            placeholder="e.g., 'What are common signs of a sick cat?' or 'How often should I groom my dog?'"
-            value={chatInput}
-            onChange={(e) => setChatInput(e.target.value)}
-          ></textarea>
-          <button
-            onClick={getPetAdvice}
-            disabled={isLoadingChat}
-            className="bg-purple-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-purple-700 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-purple-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoadingChat ? 'Getting Advice...' : 'Get Advice ✨'}
-          </button>
-          {chatResponse && (
-            <div className="bg-gray-100 p-4 rounded-lg mt-4 border border-gray-200">
-              <p className="font-semibold text-gray-800 mb-2">Advice:</p>
-              <p className="text-gray-700 whitespace-pre-wrap">{chatResponse}</p>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {selectedVet && (
-        <PaymentModal
-          isOpen={isPaymentModalOpen}
-          onClose={handlePaymentCancel}
-          onConfirm={handlePaymentConfirm}
-          bookingFee={BOOKING_FEE}
-          vetName={selectedVet.name}
-        />
-      )}
-    </div>
-  );
-}
-
 // Pet Products Page Component
 function PetProductsPage({ cart, setCart, showNotification }) {
   // Pet Products data (moved here for encapsulation)
   const products = [
-    { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'A vibrant, feather-filled toy designed to stimulate your cat\'s natural hunting instincts and provide endless hours of playful engagement.', image: 'https://bing.com/th/id/BCO.b6395632-57e2-49a7-b762-acf9b442a1f8.png' },
-    { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'Luxurious and orthopedic pet bed, crafted with memory foam for superior comfort and support, ensuring your furry friend gets the best rest.', image: 'https://bing.com/th/id/BCO.a1e85a7f-e8d0-4d39-9a46-0bc009d1cb6c.png' },
-    { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'An all-in-one grooming solution with professional-grade brushes, combs, and clippers to keep your pet\'s coat healthy, shiny, and tangle-free.', image: 'https://bing.com/th/id/BCO.8cf643d5-6f6e-43f9-b9b2-fa93822f28da.png' },
-    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://bing.com/th/id/BCO.cca81caa-c36b-4374-af7d-12b5e31d7a61.png' },
+    { id: 2, name: 'Interactive Cat Toy', price: 650, description: 'A vibrant, feather-filled toy designed to stimulate your cat\'s natural hunting instincts and provide endless hours of playful engagement.', image: 'https://images.unsplash.com/photo-1627916568474-0f2c0f0f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxjYXQlMjB0b3l8ZW58MHx8fHwxNzE5OTQ5NjQyfDB&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 3, name: 'Comfort Pet Bed', price: 3500, description: 'Luxurious and orthopedic pet bed, crafted with memory foam for superior comfort and support, ensuring your furry friend gets the best rest.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxkb2clMjBiZWR8ZW5ufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 4, name: 'Pet Grooming Kit', price: 1800, description: 'An all-in-one grooming solution with professional-grade brushes, combs, and clippers to keep your pet\'s coat healthy, shiny, and tangle-free.', image: 'https://images.unsplash.com/photo-1583337130417-ab7e22d7a3d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxwZXQlMjBncm9vbWluZyUyMGtpdHxlbnwwfHx8fDE3MTk5NDk2NDJ8MA&ixlib=rb-4.0.3&q=80&w=1080' },
+    { id: 6, name: 'Fish Tank Decor', price: 750, description: 'Enhance your aquatic environment with realistic and safe fish tank decorations, creating a vibrant and stimulating underwater landscape for your fish.', image: 'https://images.unsplash.com/photo-1598133502209-b903061f0f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzM4OTZ8MHwxfHxmaXNoJTIwdGFuayUyMGRlY29yfGVufDB8fHx8MTcxOTk0OTY0Mnww&ixlib=rb-4.0.3&q=80&w=1080' },
   ];
 
   // Function to add item to cart
@@ -1100,7 +867,7 @@ function PolicyPage({ showNotification }) {
     • Marketing and Advertising. We use your personal information for marketing
      and promotional purposes, such as to send marketing, advertising and
      promotional communications by email, text message or postal mail, and to show
-     you online advertisements for products or services on the Services or other
+     you online advertisements for products or services on the Services and other
      websites, including based on items you previously have purchased or added to
      your cart and other activity on the Services.
 
@@ -1228,8 +995,7 @@ function PolicyPage({ showNotification }) {
     We will not discriminate against you for exercising any of these rights. We may need to
      verify your identity before we can process your requests, as permitted or required under
      applicable law. In accordance with applicable laws, you may designate an authorized
-     agent to make requests on your behalf to exercise your rights. Before accepting such a
-     request from an agent, we will require that the agent provide proof you have authorized
+     agent to make requests on your behalf to obtain proof you have authorized
      them to act on your behalf, and we may need you to verify your identity directly with us.
      We will respond to your request in a timely manner as required under applicable law.
 
@@ -1262,13 +1028,7 @@ function PolicyPage({ showNotification }) {
 
     Should you have any questions about our privacy practices or this Privacy Policy, or if
      you would like to exercise any of the rights available to you, please call or email us at
-    cbee69a@gmail.com
-
-    shipping policy:
-     All products will get delivered within 3 to 5 working days from the date of ordered.
-     Refund Policy:
-
-     No replacement and No exchange will be provided at any cost, No return and No refund and No cancellation will be provided once item   is ordered.
+     cbee69a@gmail.com
   `;
 
   // Function to format the policy text for display
@@ -1347,7 +1107,7 @@ const App = () => {
     <div className="font-quicksand antialiased">
       <Navbar setCurrentPage={setCurrentPage} currentPage={currentPage} />
       {currentPage === 'home' && <HomePage setCurrentPage={setCurrentPage} showNotification={showNotification} />}
-      {currentPage === 'vet-services' && <VetServicesPage showNotification={showNotification} />}
+      {/* Removed Vet Services page from rendering in App component */}
       {currentPage === 'pet-products' && <PetProductsPage cart={cart} setCart={setCart} showNotification={showNotification} />}
       {currentPage === 'policy' && <PolicyPage showNotification={showNotification} />} {/* Render PolicyPage */}
       {currentPage === 'contact-us' && <ContactUsPage showNotification={showNotification} />}
