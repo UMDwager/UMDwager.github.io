@@ -1014,11 +1014,7 @@ No replacement and No exchange will be provided at any cost, No return and No re
     Please note that we may transfer, store and process your personal information outside
      the country you live in.
 
-    If we transfer your personal information out of the European Economic Area or the
-     United Kingdom, we will rely on recognized transfer mechanisms like the European
-     Commission's Standard Contractual Clauses, or any equivalent contracts issued by the
-     relevant competent authority of the UK, as relevant, unless the data transfer is to a
-     country that has been determined to provide an adequate level of protection.
+
 
     Changes to This Privacy Policy
 
