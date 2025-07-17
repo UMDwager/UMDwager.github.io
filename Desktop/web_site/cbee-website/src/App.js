@@ -777,11 +777,13 @@ function PolicyPage({ showNotification }) {
 
     Questions about the Terms of Service should be sent to us at Email id :
      cbee69a@gmail.com.
+Shipping Policy:
 
-    Return and refund policy
+All products will get delivered within 3 to 5 working days from the date of ordered.
 
-    No cancellation and No refund will be provided once the payment has been made for
-     the services.
+Refund Policy:
+
+No replacement and No exchange will be provided at any cost, No return and No refund and No cancellation will be provided once item is ordered.
 
     Privacy policy
 
