@@ -328,8 +328,7 @@ function PetProductsPage({ cart, setCart, showNotification }) {
 function ContactUsPage({ showNotification }) {
   // Removed formData state and handleChange/handleSubmit functions
   const CONTACT_EMAIL = 'cbee69a@gmail.com';
-  const CONTACT_PHONE = '+91 9019301910'; // Updated mobile number
-
+  const CONTACT_PHONE = ''//
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 p-8">
       <div className="container mx-auto">
